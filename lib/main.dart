@@ -15,7 +15,7 @@ class FitnessApp extends StatelessWidget {
         primaryColor: Color.fromRGBO(50, 65, 85, 1),
         textTheme: TextTheme(headline6: TextStyle(color: Colors.white))
       ),
-      home: HomePage(),
+      home: AuthorizationPage(),
     );
   }
 }

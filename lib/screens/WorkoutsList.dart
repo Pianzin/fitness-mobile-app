@@ -54,7 +54,7 @@ class WorkoutsList extends StatelessWidget {
     );
   }
 
-  _subtitle(BuildContext context, Workout workout) {
+  Row _subtitle(BuildContext context, Workout workout) {
     var color = Colors.grey;
     double indicatorLevel = 0;
 
