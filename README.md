@@ -1,4 +1,4 @@
-# maxfit
+# Fitness
 
 A new Flutter project.
 

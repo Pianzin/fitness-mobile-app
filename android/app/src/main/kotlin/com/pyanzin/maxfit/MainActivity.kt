@@ -1,4 +1,4 @@
-package com.pyanzin.maxfit
+package com.pyanzin.fitness
 
 import io.flutter.embedding.android.FlutterActivity
 
