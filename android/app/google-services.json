@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "856881632314",
+    "firebase_url": "https://fitness-dev-94ea4.firebaseio.com",
+    "project_id": "fitness-dev-94ea4",
+    "storage_bucket": "fitness-dev-94ea4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:856881632314:android:235ea15bcc399c020f5103",
+        "android_client_info": {
+          "package_name": "com.pyanzin.fitness"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "856881632314-cvm2n4i1j5qmml8n3v65eld40hr2mre5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJYCYh1W4z40TnDedeIAmS4I9tfc427fI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "856881632314-cvm2n4i1j5qmml8n3v65eld40hr2mre5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,8 @@
-import 'package:fitness/widget/BottomWaveClipper.dart';
+import 'package:fitness/model/user.dart';
+import 'package:fitness/service/auth.dart';
+import 'package:fitness/widget/bottomWaveClipper.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class AuthorizationPage extends StatefulWidget {
   AuthorizationPage({Key key}) : super(key: key);
@@ -16,20 +19,20 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
   String _password;
   bool showLogin = true;
 
+  AuthService _authService = AuthService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Theme
-            .of(context)
-            .primaryColor,
+        backgroundColor: Theme.of(context).primaryColor,
         body: Column(
           children: <Widget>[
             _logo(),
             SizedBox(height: MediaQuery.of(context).size.height / 9),
             (
                 showLogin
-                    ? _formColumn('LOGIN', 'Not registered yet? Register!')
-                    : _formColumn('REGISTER', 'Already Registered? Login!')
+                    ? _formColumn('LOGIN', 'Not registered yet? Register!', _loginButtonAction)
+                    : _formColumn('REGISTER', 'Already Registered? Login!', _registerButtonAction)
             ),
             _bottomWave(),
           ],
@@ -38,7 +41,7 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
 
   Widget _logo() {
     return Padding(
-      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height / 7),
+      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height / 6),
       child: Container(
         child: Align(
           child: Text(
@@ -53,10 +56,10 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
     );
   }
 
-  Column _formColumn(String buttonText, String hintText) {
+  Column _formColumn(String buttonText, String hintText, void buttonAction()) {
     return Column(
       children: <Widget>[
-        _form(buttonText, _buttonAction),
+        _form(buttonText, buttonAction),
         Padding(
           padding: EdgeInsets.all(10),
           child: GestureDetector(
@@ -72,20 +75,60 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
     );
   }
 
-  void _buttonAction() {
+  void _loginButtonAction() async {
     _email = _emailController.text;
     _password = _passwordController.text;
 
-    _emailController.clear();
-    _passwordController.clear();
+    if (_email.isEmpty || _password.isEmpty) {
+      return;
+    }
+
+    User user = await _authService.signWithEmailAndPassword(_email.trim(), _password.trim());
+
+    if (user == null) {
+      Fluttertoast.showToast(
+          msg: "Can't signIn you! Please check your email/password",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+    } else {
+      _emailController.clear();
+      _passwordController.clear();
+    }
   }
 
-  Widget _form(String label, void func()) {
+  void _registerButtonAction() async {
+    _email = _emailController.text;
+    _password = _passwordController.text;
+    if (_email.isEmpty || _password.isEmpty) {
+      return;
+    }
+    User user = await _authService.registerWithEmailAndPassword(_email.trim(), _password.trim());
+    if (user == null) {
+      Fluttertoast.showToast(
+          msg: "Can't register you! Please check your email/password",
+          toastLength: Toast.LENGTH_SHORT,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+    } else {
+      _emailController.clear();
+      _passwordController.clear();
+    }
+  }
+
+  Widget _form(String label, void buttonAction()) {
     return Container(
       child: Column(
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.only(top: 10, bottom: 20),
+            padding: EdgeInsets.only(bottom: 20),
             child: _input(Icon(Icons.email), "Email", _emailController, false),
           ),
           Padding(
@@ -98,7 +141,7 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
             child: Container(
               height: 50,
               width: MediaQuery.of(context).size.width,
-              child: _button(label, func),
+              child: _button(label, buttonAction),
             ),
           ),
         ],

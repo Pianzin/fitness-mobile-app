@@ -1,5 +1,5 @@
 import 'package:fitness/model/LevelEnum.dart';
-import 'package:fitness/model/Workout.dart';
+import 'package:fitness/model/workout.dart';
 import 'package:flutter/material.dart';
 
 class WorkoutsList extends StatelessWidget {
