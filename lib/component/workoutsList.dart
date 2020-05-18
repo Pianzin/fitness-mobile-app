@@ -210,8 +210,8 @@ class _WorkoutsListState extends State<WorkoutsList> {
   }
 
   Row _subtitle(BuildContext context, Workout workout) {
-    var color = Colors.grey;
-    double indicatorLevel = 0;
+    var color;
+    double indicatorLevel;
 
     switch(workout.level) {
       case LevelEnum.Beginner:
@@ -225,6 +225,10 @@ class _WorkoutsListState extends State<WorkoutsList> {
       case LevelEnum.Advanced:
         color = Colors.red;
         indicatorLevel = 1;
+        break;
+      default:
+        color = Colors.grey;
+        indicatorLevel = 0;
         break;
     }
 
