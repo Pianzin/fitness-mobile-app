@@ -1,8 +1,9 @@
 import 'package:fitness/model/user.dart';
-import 'package:fitness/screens/AuthorizationPage.dart';
-import 'package:fitness/screens/HomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'authorization.dart';
+import 'home.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({Key key}) : super(key: key);

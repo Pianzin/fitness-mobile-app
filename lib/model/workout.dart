@@ -1,4 +1,4 @@
-import 'package:fitness/model/LevelEnum.dart';
+import 'package:fitness/model/enum/level.dart';
 
 class Workout {
   String title;

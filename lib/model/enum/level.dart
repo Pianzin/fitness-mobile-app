@@ -1,4 +1,5 @@
 enum LevelEnum {
+  Any_Level,
   Beginner,
   Intermediate,
   Advanced,
@@ -6,6 +7,6 @@ enum LevelEnum {
 
 extension ParseToString on LevelEnum {
   String toShortString() {
-    return this.toString().split('.').last;
+    return this.toString().replaceAll('_', ' ').split('.').last;
   }
 }
